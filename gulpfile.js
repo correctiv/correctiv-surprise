@@ -14,12 +14,11 @@ var watchify = require('watchify');
 var babel = require('babelify');
 
 var DIST = 'dist/';
-var CSS_SOURCE = 'less';
 var CSS_DEST = 'dist/css';
 var JS_DEST = 'dist/js';
-var MAIN_LESS_FILE = '/main.less';
+var MAIN_LESS_FILE = 'styles.less';
 var MAIN_JS_FILE = 'index.js';
-var SERVER_PORT = 1337;
+var SERVER_PORT = 4000;
 
 /* Compile ES6 */
 // https://gist.github.com/danharper/3ca2273125f500429945
@@ -49,7 +48,7 @@ function compileJS(watch) {
 /* Compile, minify, and compress LESS files */
 gulp.task('less', function() {
   var combined = combiner.obj([
-    gulp.src(CSS_SOURCE + MAIN_LESS_FILE),
+    gulp.src(MAIN_LESS_FILE),
     less(),
     autoprefixer({
       browsers: ['last 2 versions'],
@@ -68,7 +67,7 @@ gulp.task('less', function() {
 /* Watch Files For Changes */
 gulp.task('watch', function() {
   livereload.listen();
-  gulp.watch(CSS_SOURCE + '/**/*.less', ['less']);
+  gulp.watch(MAIN_LESS_FILE, ['less']);
 
   /* Trigger a live reload on any template changes */
   gulp.watch('index.html').on('change', livereload.changed);
