@@ -40,11 +40,6 @@ function updateColors(maxValue) {
   });
 }
 
-//background rectangle
-svgDoc.append('rect')
-  .attr('width', 120)
-  .attr('height', 180);
-
 //text element to display number of icons highlighted
 svgDoc.append('text')
   .attr('id', 'txtValue')

@@ -1,19 +1,17 @@
-#sliderDiv  {
-  margin:10px;
-  margin-top:30px;
-  height:15px;
-  width:350px;
+body {
+  margin: 0;
+  padding: 0;
 }
 
 svg {
   overflow:none;
   padding:10px;
   float:left;
-  width:350px;
-  height:350px;
+  width: 400px;
+  height: 500px;
 }
 
-text    {
+text {
   fill:orange;
   text-anchor:left;
   font-size:12px;
@@ -22,13 +20,22 @@ text    {
 }
 
 .iconPlain  {
-  fill:white;
+  fill: #555;
 }
 
 .iconSelected  {
   fill:orange;
 }
 
-rect    {
-  fill:#555555;
+input[type=range] {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  width: 450px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  transform-origin: 0 0;
+  transform: rotate(90deg);
+  z-index: 0;
 }
