@@ -1,6 +1,12 @@
 import d3 from 'd3';
 
+const CLASS_NAMES = {
+  GUESS: 'circle--guess',
+  ACTUAL: 'circle--actual'
+}
+
 var maxItems = 648;
+var actualItems = 10;
 
 //specify the number of columns and rows for pictogram layout
 var numCols = 20;
@@ -29,15 +35,8 @@ var slider = body.append('input')
 var svgDoc = body.append('svg')
   .attr('viewBox','0 0 120 180');
 
-function updateColors(maxValue) {
-  d3.selectAll('circle').attr('class', (d, i) => {
-    if (d < maxValue) {
-      return 'iconSelected';
-    }
-    else {
-      return 'iconPlain';
-    }
-  });
+function updateColors(maxValue, className) {
+  d3.selectAll('circle').classed(className, d => d < maxValue);
 }
 
 //text element to display number of icons highlighted
@@ -57,7 +56,7 @@ svgDoc.append('g')
   .append('circle')
   .attr('r', 1)
   .attr('id', (d) => 'icon' + d)
-  .classed('iconPlain', true)
+  .classed('circle', true)
   .attr('cx', (d) => {
     var remainder = d % numCols; // calculates the x position (column number) using modulus
     return xPadding + (remainder * wBuffer); // apply the buffer and return value
@@ -67,8 +66,10 @@ svgDoc.append('g')
     return yPadding + (whole * hBuffer); // apply the buffer and return the value
   });
 
+updateColors(actualItems, CLASS_NAMES.ACTUAL);
+
 slider.on('input', () => {
   let value = slider.property('value');
   d3.select('#txtValue').text(value);
-  updateColors(value);
+  updateColors(value, CLASS_NAMES.GUESS);
 });
