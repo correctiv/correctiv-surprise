@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+svg {
+  overflow: none;
+  padding: 10px;
+  float: left;
+  width: 400px;
+  height: 500px;
+}
+text {
+  fill: orange;
+  text-anchor: left;
+  font-size: 12px;
+  font-family: sans-serif, Helvetica, Arial;
+  font-weight: bold;
+}
+circle {
+  fill: #555;
+}
+.circle--actual {
+  fill: blue;
+}
+.circle--guess {
+  fill: red;
+}
+input[type=range] {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  width: 450px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  z-index: 0;
+}
