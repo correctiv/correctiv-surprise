@@ -12,6 +12,7 @@ var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var babel = require('babelify');
+var ghPages = require('gulp-gh-pages');
 
 var DIST = 'dist/';
 var CSS_DEST = 'dist/css';
@@ -81,7 +82,7 @@ gulp.task('watch', function() {
 
 gulp.task('serve', function() {
   //Set up your static fileserver, which serves files in the build dr
-  http.createServer(ecstatic({ root: __dirname })).listen(SERVER_PORT);
+  http.createServer(ecstatic({ root: __dirname + '/dist' })).listen(SERVER_PORT);
 });
 
 // copy static assets to dist folder
@@ -94,6 +95,12 @@ gulp.task('images', function() {
 gulp.task('html', function() {
   return gulp.src('**/*.html')
     .pipe(gulp.dest(DIST));
+});
+
+// deploy to github pages
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
 });
 
 gulp.task('javascript:build', function() { return compileJS(); });
