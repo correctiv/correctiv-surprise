@@ -30,6 +30,8 @@
     "watchify": "^3.3.1"
   },
   "dependencies": {
-    "d3": "^3.5.6"
+    "d3": "^3.5.6",
+    "react": "^0.13.3",
+    "react-slider": "^0.5.1"
   }
 }

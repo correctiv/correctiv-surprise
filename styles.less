@@ -4,19 +4,21 @@ body {
 }
 
 svg {
-  overflow:none;
-  padding:10px;
-  float:left;
-  width: 400px;
+  overflow: none;
+  float: left;
+  width: 315px;
+  padding: 0;
   height: 500px;
+  margin: 0 0 0 40px;
+  background: lightgrey;
 }
 
 text {
-  fill:orange;
-  text-anchor:left;
-  font-size:12px;
-  font-family:sans-serif,Helvetica,Arial;
-  font-weight:bold;
+  fill: orange;
+  text-anchor: left;
+  font-size: 12px;
+  font-family: sans-serif, Helvetica, Arial;
+  font-weight: bold;
 }
 
 circle {
@@ -31,15 +33,74 @@ circle {
   fill: red;
 }
 
-input[type=range] {
-  position: absolute;
+
+
+
+
+
+
+body {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.horizontal-slider {
+  width: 100%;
+  max-width: 500px;
+  height: 50px;
+  border: 1px solid grey;
+}
+
+.vertical-slider {
+  height: 380px;
+  width: 50px;
+  border: 1px solid grey;
+}
+
+.handle {
+  font-size: 0.9em;
+  text-align: center;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.handle.active {
+  background-color: grey;
+}
+
+.bar {
+  position: relative;
+  background: #ddd;
+}
+
+.bar.bar-1 {
+  background: #f00;
+}
+
+.bar.bar-2 {
+  background: #0f0;
+}
+
+.horizontal-slider .bar {
   top: 20px;
-  left: 30px;
-  width: 450px;
   height: 10px;
-  margin: 0;
-  padding: 0;
-  transform-origin: 0 0;
-  transform: rotate(90deg);
-  z-index: 0;
+}
+
+.horizontal-slider .handle {
+  top: 1px;
+  width: 50px;
+  height: 48px;
+  line-height: 48px;
+}
+
+.vertical-slider .handle {
+  left: 1px;
+  width: 48px;
+  height: 20px;
+  line-height: 50px;
+}
+
+.vertical-slider .bar {
+  left: 20px;
+  width: 10px;
 }
