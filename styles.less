@@ -1,16 +1,10 @@
+@base: #b3b3b3;
+@primary: #29ae9a;
+@secondary: #ff7a7f;
+
 body {
   margin: 0;
-  padding: 0;
-}
-
-svg {
-  overflow: none;
-  float: left;
-  width: 315px;
-  padding: 0;
-  height: 500px;
-  margin: 0 0 0 40px;
-  background: lightgrey;
+  padding: 20px 0;
 }
 
 text {
@@ -22,85 +16,81 @@ text {
 }
 
 circle {
-  fill: #555;
+  fill: @base;
 }
 
-.circle--actual {
-  fill: blue;
+.chart {
+  float: left;
+  width: 320px;
+  padding: 0;
+  margin: 0 20px 0 0;
+  padding: 0;
+  background: #f2f2f2;
 }
 
-.circle--guess {
-  fill: red;
+.circle--secondary {
+  fill: @secondary;
 }
 
-
-
-
-
-
-
-body {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-.horizontal-slider {
-  width: 100%;
-  max-width: 500px;
-  height: 50px;
-  border: 1px solid grey;
+.circle--primary {
+  fill: @primary;
 }
 
 .vertical-slider {
-  height: 380px;
   width: 50px;
-  border: 1px solid grey;
-}
-
-.handle {
-  font-size: 0.9em;
-  text-align: center;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
-
-.handle.active {
-  background-color: grey;
-}
-
-.bar {
   position: relative;
-  background: #ddd;
+  float: left;
+
+  .handle {
+    position: relative;
+    text-align: center;
+    background-color: @secondary;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    width: 15px;
+    margin-top: -3px;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-right: 10px solid @secondary;
+      border-bottom: 15px solid transparent;
+      left: -10px;
+      top: 0px;
+    }
+  }
+
+  .handle.active {
+    background-color: darken(@secondary, 10%);
+
+    &:before {
+      border-right: 10px solid darken(@secondary, 10%);
+    }
+  }
+
+  .bar {
+    left: 5px;
+    width: 3px;
+    border-radius: 2px;
+    position: relative;
+    background: @base;
+  }
+
+  .bar-0 {
+    background: @secondary;
+    border: 1px solid darken(@secondary, 10%);
+  }
+
+  .bar-1 {
+    background: @base;
+    border: 1px solid darken(@base, 10%);
+  }
 }
 
-.bar.bar-1 {
-  background: #f00;
-}
 
-.bar.bar-2 {
-  background: #0f0;
-}
-
-.horizontal-slider .bar {
-  top: 20px;
-  height: 10px;
-}
-
-.horizontal-slider .handle {
-  top: 1px;
-  width: 50px;
-  height: 48px;
-  line-height: 48px;
-}
-
-.vertical-slider .handle {
-  left: 1px;
-  width: 48px;
-  height: 20px;
-  line-height: 50px;
-}
-
-.vertical-slider .bar {
-  left: 20px;
-  width: 10px;
-}

@@ -93,7 +93,7 @@ gulp.task('images', function() {
 
 // copy example to dist folder
 gulp.task('html', function() {
-  return gulp.src('**/*.html')
+  return gulp.src('examples/**/*.html')
     .pipe(gulp.dest(DIST));
 });
 

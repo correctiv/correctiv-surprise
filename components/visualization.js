@@ -7,28 +7,33 @@ const NUM_COLUMNS = 20;
 const RADIUS = 5;
 const PADDING = 15;
 const CLASS_NAMES = {
-  GUESS: 'circle--guess',
-  ACTUAL: 'circle--actual'
+  PRIMARY: 'circle--primary',
+  SECONDARY: 'circle--secondary'
 }
 
 class Renderer {
 
   constructor(el, state) {
+    let numRows = Math.ceil(state.max / NUM_COLUMNS);
+    this.height = numRows * PADDING + PADDING;
+    this.width = NUM_COLUMNS * PADDING + PADDING;
+
     d3.select(el).append('svg')
+      .attr('height', this.height)
+      .attr('width', this.width)
       .attr('class', 'd3')
       .append('g')
 
-    this._updateGrid(el, state);
-    this._updateColors(el, 20, CLASS_NAMES.GUESS);
-    this._updateColors(el, 40, CLASS_NAMES.ACTUAL);
+    this._renderGrid(el, state);
+    this.update(el, state);
   }
 
-  update(el, {guess, actual}) {
-    this._updateColors(el, guess, CLASS_NAMES.GUESS);
-    this._updateColors(el, actual, CLASS_NAMES.ACTUAL);
+  update(el, {primary, secondary}) {
+    this._updateColors(el, secondary, CLASS_NAMES.SECONDARY);
+    this._updateColors(el, primary, CLASS_NAMES.PRIMARY);
   }
 
-  _updateGrid(el, state) {
+  _renderGrid(el, state) {
     let index = d3.range(state.max);
     let g = d3.select(el).selectAll('g');
     let point = g.selectAll('.circle').data(index);
@@ -72,9 +77,13 @@ class Visualization extends React.Component {
   getChartState() {
     return {
       max: this.props.max,
-      actual: this.props.actual,
-      guess: this.props.guess
+      primary: this.props.primary,
+      secondary: this.props.secondary
     }
+  }
+
+  getHeight() {
+    return this.renderer.height;
   }
 
   render() {

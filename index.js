@@ -9,31 +9,50 @@ class Surprise extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      max: 611,
-      actual: 50,
-      guess: 0,
+      max: props.max,
+      primary: props.primary || 0,
+      secondary: props.secondary || 0
     }
   }
 
   render() {
     return (
       <div className="surprise">
-        <Slider
-          max={this.state.max}
-          onChange={value => this._handleChange(value)}
-        />
         <Visualization
           max={this.state.max}
-          actual={this.state.actual}
-          guess={this.state.guess}
+          primary={this.state.primary}
+          secondary={this.state.secondary}
+        />
+        <Visualization
+          ref='visualization'
+          max={this.state.max}
+          primary={this.state.primary}
+          secondary={this.state.secondary}
+        />
+        <Slider
+          ref='slider'
+          max={this.state.max}
+          onChange={value => this._handleChange(value)}
         />
       </div>
     )
   }
 
+  componentDidMount() {
+    let height = this.refs.visualization.getHeight();
+    this.refs.slider.setHeight(height);
+  }
+
   _handleChange(value) {
-    this.setState({guess: value});
+    this.setState({secondary: value});
   }
 }
 
-React.render(<Surprise name='BigSurprise' />, document.body);
+window.Surprise = {
+  render (el, options) {
+    React.render(React.createElement(Surprise, options), el);
+  },
+  renderStatic (el, options) {
+    React.render(React.createElement(Visualization, options), el);
+  }
+};
