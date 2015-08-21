@@ -69,9 +69,11 @@ gulp.task('less', function() {
 gulp.task('watch', function() {
   livereload.listen();
   gulp.watch(MAIN_LESS_FILE, ['less']);
+  gulp.watch('styles/**/*.less', ['less']);
+  gulp.watch('examples/**/*.html', ['html']);
 
   /* Trigger a live reload on any template changes */
-  gulp.watch('index.html').on('change', livereload.changed);
+  gulp.watch(DIST + '/**/*.html').on('change', livereload.changed);
 
   /* Trigger a live reload upon CSS complilation */
   gulp.watch(CSS_DEST + '/**').on('change', livereload.changed);
