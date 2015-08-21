@@ -9,9 +9,9 @@ class Surprise extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      max: props.max,
-      primary: props.primary || 0,
-      secondary: props.secondary || 0
+      max: props.interactive.max,
+      primary: props.interactive.primary || 0,
+      secondary: props.interactive.secondary || 0
     }
   }
 
@@ -19,15 +19,18 @@ class Surprise extends React.Component {
     return (
       <div className="surprise">
         <Visualization
-          max={this.state.max}
-          primary={this.state.primary}
-          secondary={this.state.secondary}
+          ref='example'
+          max={this.props.example.max}
+          primary={this.props.example.primary}
+          secondary={this.props.example.secondary}
+          numRows={this.props.example.numRows}
         />
         <Visualization
-          ref='visualization'
+          ref='interactive'
           max={this.state.max}
           primary={this.state.primary}
           secondary={this.state.secondary}
+          numRows={this.props.interactive.numRows}
         />
         <Slider
           ref='slider'
@@ -39,7 +42,8 @@ class Surprise extends React.Component {
   }
 
   componentDidMount() {
-    let height = this.refs.visualization.getHeight();
+    let height = this.refs.interactive.getHeight();
+    this.refs.example.setHeight(height);
     this.refs.slider.setHeight(height);
   }
 

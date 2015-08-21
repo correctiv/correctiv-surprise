@@ -15,7 +15,7 @@ const CLASS_NAMES = {
 class Renderer {
 
   constructor(el, state) {
-    let numRows = Math.ceil(state.max / NUM_COLUMNS);
+    let numRows = state.numRows || Math.ceil(state.max / NUM_COLUMNS);
     let height = numRows * PADDING + PADDING;
     let width = NUM_COLUMNS * PADDING + PADDING;
 
@@ -24,7 +24,6 @@ class Renderer {
       .attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('class', 'd3')
       .append('g')
-      .attr('width', '100%')
 
     this._renderGrid(el, state);
     this.update(el, state);
@@ -78,6 +77,7 @@ class Visualization extends React.Component {
 
   getChartState() {
     return {
+      numRows: this.props.numRows,
       max: this.props.max,
       primary: this.props.primary,
       secondary: this.props.secondary
@@ -87,6 +87,11 @@ class Visualization extends React.Component {
   getHeight() {
     let el = React.findDOMNode(this);
     return el.offsetHeight;
+  }
+
+  setHeight(height) {
+    let el = React.findDOMNode(this);
+    el.height = height;
   }
 
   render() {
