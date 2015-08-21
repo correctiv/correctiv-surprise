@@ -2,6 +2,7 @@
 
 import d3 from 'd3';
 import React from 'react';
+import Panel from './panel';
 
 const NUM_COLUMNS = 20;
 const RADIUS = 5;
@@ -20,7 +21,7 @@ class Renderer {
     let width = NUM_COLUMNS * PADDING + PADDING;
 
     d3.select(el).append('svg')
-      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr('viewBox', `0 0 ${width} ${height}`)
       .attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('class', 'd3')
       .append('g')
@@ -63,6 +64,9 @@ class Visualization extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      confirmed: props.interactive ? false : true
+    }
   }
 
   componentDidMount() {
@@ -79,7 +83,7 @@ class Visualization extends React.Component {
     return {
       numRows: this.props.numRows,
       max: this.props.max,
-      primary: this.props.primary,
+      primary: this.state.confirmed ? this.props.primary : null,
       secondary: this.props.secondary
     }
   }
@@ -95,7 +99,39 @@ class Visualization extends React.Component {
   }
 
   render() {
-    return <div className="chart"></div>
+    return (
+      <div className='chart'>
+        {this._renderPanel()}
+      </div>
+    )
+  }
+
+  _renderPanel() {
+    if (this.props.showPanel) {
+      if (this.state.confirmed) {
+        return <Panel
+          max={this.props.max}
+          primary={this.props.primary}
+          secondary={this.props.secondary}
+          labels={this.props.labels}
+        />
+      }
+      else {
+        return <Panel
+          max={this.props.max}
+          secondary={this.props.secondary}
+          onConfirm={event => this._handleConfirm(event)}
+          labels={this.props.labels}
+        />
+      }
+    }
+  }
+
+  _handleConfirm() {
+    this.props.onConfirm();
+    this.setState({
+      confirmed: true
+    })
   }
 }
 

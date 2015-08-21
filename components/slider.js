@@ -8,7 +8,7 @@ class Slider extends React.Component {
   render() {
     return (
       <ReactSlider
-        height={this.props.height}
+        value={this.props.value}
         max={this.props.max}
         onChange={this.props.onChange}
         defaultValue={[0]}

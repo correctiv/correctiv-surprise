@@ -10,8 +10,30 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
       Surprise.render(document.body, {
-        example: {max: 622, primary: 99, numRows: 34},
-        interactive: {max: 647, numRows: 34}
+        example: {
+          max: 622,
+          primary: 99,
+          numRows: 34,
+          labels: {
+            title: 'Handtaschenraub',
+            maxLabel: 'Anzeigen:',
+            primaryLabel: 'Presseaussendungen:'
+          }
+        },
+        interactive: {
+          max: 647,
+          primary: 10,
+          secondary: 50,
+          numRows: 34,
+          labels: {
+            title: 'Vergewaltigungen',
+            description: 'Über wie viele Vergewaltigungen berichtete die Polizei? Verwenden Sie den Schieberegler um eine Schätzung abzugeben.',
+            maxLabel: 'Anzeigen:',
+            primaryLabel: 'Tatsächliche Anzahl:',
+            secondaryLabel: 'Deine Schätzung:',
+            button: 'Schätzung überprüfen'
+          }
+        }
       });
     </script>
   </body>
