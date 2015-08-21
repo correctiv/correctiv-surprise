@@ -1,96 +1,12 @@
+@body: #1a1a1a;
 @base: #b3b3b3;
 @primary: #29ae9a;
 @secondary: #ff7a7f;
 
-body {
-  margin: 0;
-  padding: 20px 0;
-}
-
-text {
-  fill: orange;
-  text-anchor: left;
-  font-size: 12px;
-  font-family: sans-serif, Helvetica, Arial;
-  font-weight: bold;
-}
-
-circle {
-  fill: @base;
-}
-
-.chart {
-  float: left;
-  width: 320px;
-  padding: 0;
-  margin: 0 20px 0 0;
-  padding: 0;
-  background: #f2f2f2;
-}
-
-.circle--secondary {
-  fill: @secondary;
-}
-
-.circle--primary {
-  fill: @primary;
-}
-
-.vertical-slider {
-  width: 50px;
-  position: relative;
-  float: left;
-
-  .handle {
-    position: relative;
-    text-align: center;
-    background-color: @secondary;
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-    height: 30px;
-    width: 15px;
-    margin-top: -3px;
-    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
-
-    &:before {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 0;
-      border-top: 15px solid transparent;
-      border-right: 10px solid @secondary;
-      border-bottom: 15px solid transparent;
-      left: -10px;
-      top: 0px;
-    }
-  }
-
-  .handle.active {
-    background-color: darken(@secondary, 10%);
-
-    &:before {
-      border-right: 10px solid darken(@secondary, 10%);
-    }
-  }
-
-  .bar {
-    left: 5px;
-    width: 3px;
-    border-radius: 2px;
-    position: relative;
-    background: @base;
-  }
-
-  .bar-0 {
-    background: @secondary;
-    border: 1px solid darken(@secondary, 10%);
-  }
-
-  .bar-1 {
-    background: @base;
-    border: 1px solid darken(@base, 10%);
-  }
-}
-
-
+@import 'styles/normalize';
+@import 'styles/typo';
+@import 'styles/chart';
+@import 'styles/description';
+@import 'styles/credits';
+@import 'styles/legend';
+@import 'styles/slider';

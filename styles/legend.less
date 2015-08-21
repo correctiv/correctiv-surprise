@@ -1,0 +1,34 @@
+.legend {
+  border-top: 4px solid @body;
+  display: inline-block;
+  margin: 0;
+  padding: 5px 0;
+  list-style: none;
+
+  @media (min-width: 768px) {
+    padding: 15px 0;
+  }
+}
+
+.legend__item {
+  margin: 0;
+  padding: 0;
+
+  &:before {
+    top: 5px;
+    position: relative;
+    content: '•';
+    font-size: 2em;
+    line-height: .8;
+    color: @base;
+    margin-right: 5px;
+  }
+
+  &.--primary:before {
+    color: @primary;
+  }
+
+  &.--secondary:before {
+    color: @secondary;
+  }
+}

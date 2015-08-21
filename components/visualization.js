@@ -7,22 +7,24 @@ const NUM_COLUMNS = 20;
 const RADIUS = 5;
 const PADDING = 15;
 const CLASS_NAMES = {
-  PRIMARY: 'circle--primary',
-  SECONDARY: 'circle--secondary'
+  BASE: 'chart__circle',
+  PRIMARY: 'chart__circle--primary',
+  SECONDARY: 'chart__circle--secondary'
 }
 
 class Renderer {
 
   constructor(el, state) {
     let numRows = Math.ceil(state.max / NUM_COLUMNS);
-    this.height = numRows * PADDING + PADDING;
-    this.width = NUM_COLUMNS * PADDING + PADDING;
+    let height = numRows * PADDING + PADDING;
+    let width = NUM_COLUMNS * PADDING + PADDING;
 
     d3.select(el).append('svg')
-      .attr('height', this.height)
-      .attr('width', this.width)
+      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('class', 'd3')
       .append('g')
+      .attr('width', '100%')
 
     this._renderGrid(el, state);
     this.update(el, state);
@@ -40,15 +42,15 @@ class Renderer {
 
     point.enter()
       .append('circle')
-      .attr('class', 'circle')
+      .attr('class', CLASS_NAMES.BASE)
       .attr('r', RADIUS)
       .attr('id', (d) => 'icon' + d)
       .attr('cx', (d) => {
-        var remainder = d % NUM_COLUMNS; // calculates the x position (column number) using modulus
+        let remainder = d % NUM_COLUMNS; // calculates the x position (column number) using modulus
         return PADDING + (remainder * PADDING); // apply the buffer and return value
       })
       .attr('cy', (d) => {
-        var whole = Math.floor(d / NUM_COLUMNS); // calculates the y position (row number)
+        let whole = Math.floor(d / NUM_COLUMNS); // calculates the y position (row number)
         return PADDING + (whole * PADDING); // apply the buffer and return the value
       });
   }
@@ -65,12 +67,12 @@ class Visualization extends React.Component {
   }
 
   componentDidMount() {
-    var el = React.findDOMNode(this);
+    let el = React.findDOMNode(this);
     this.renderer = new Renderer(el, this.getChartState());
   }
 
   componentDidUpdate() {
-    var el = React.findDOMNode(this);
+    let el = React.findDOMNode(this);
     this.renderer.update(el, this.getChartState());
   }
 
@@ -83,7 +85,8 @@ class Visualization extends React.Component {
   }
 
   getHeight() {
-    return this.renderer.height;
+    let el = React.findDOMNode(this);
+    return el.offsetHeight;
   }
 
   render() {
