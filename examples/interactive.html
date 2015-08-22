@@ -7,9 +7,17 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
   </head>
   <body>
+    <div id='viz'></div>
+    <small class='credits'>
+      <p class='credits__item'>Quelle: Presseaussendungen der Wiener Polizei, Polizeiliche Kriminalstatistik (2013 und 2014, zusammengefasst). </p>
+      <p class='credits__item'>
+        Visualisierung:
+        <a class='credits__link' href='https://correctiv.org' target='_blank'>CORRECT!V</a>
+      </p>
+    </small>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-      Surprise.render(document.body, {
+      Surprise.render(document.getElementById('viz'), {
         example: {
           max: 622,
           primary: 130,
