@@ -22,6 +22,10 @@ class Slider extends React.Component {
     let el = React.findDOMNode(this);
     el.style.height = `${height}px`;
   }
+  setTop(top) {
+    let el = React.findDOMNode(this);
+    el.style.top = `${top}px`;
+  }
 }
 
 export default Slider;

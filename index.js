@@ -25,6 +25,7 @@ class Surprise extends React.Component {
           labels={this.props.example.labels}
           max={this.props.example.max}
           primary={this.props.example.primary}
+          numColumns={this.props.example.numColumns}
           numRows={this.props.example.numRows}
         />
         <Visualization
@@ -35,6 +36,7 @@ class Surprise extends React.Component {
           max={this.state.max}
           primary={this.state.primary}
           secondary={this.state.secondary}
+          numColumns={this.props.interactive.numColumns}
           numRows={this.props.interactive.numRows}
           onConfirm={event => this._handleConfirm(event)}
         />
@@ -46,17 +48,18 @@ class Surprise extends React.Component {
   componentDidMount() {
     let height = this.refs.interactive.getHeight();
     this.refs.slider.setHeight(height);
+    let top = this.refs.interactive.getTop();
+    this.refs.slider.setTop(top);
   }
 
   _renderSlider() {
-    if (this.state.confirmed === false) {
-      return <Slider
-        ref='slider'
-        max={this.state.max}
-        value={this.state.secondary}
-        onChange={value => this._handleChange(value)}
-      />
-    }
+    return <Slider
+      ref='slider'
+      max={this.state.max}
+      value={this.state.secondary}
+      // disabled=this.state.confirmed === false
+      onChange={value => this._handleChange(value)}
+    />
   }
 
   _handleChange(value) {

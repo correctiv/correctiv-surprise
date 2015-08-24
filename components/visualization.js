@@ -4,9 +4,8 @@ import d3 from 'd3';
 import React from 'react';
 import Panel from './panel';
 
-const NUM_COLUMNS = 20;
-const RADIUS = 5;
-const PADDING = 15;
+const RADIUS = 3;
+const PADDING = 8;
 const CLASS_NAMES = {
   BASE: 'chart__circle',
   PRIMARY: 'chart__circle--primary',
@@ -16,15 +15,21 @@ const CLASS_NAMES = {
 class Renderer {
 
   constructor(el, state) {
-    let numRows = state.numRows || Math.ceil(state.max / NUM_COLUMNS);
+    let numRows;
+    if (state.numRows === undefined) {
+      numRows = Math.ceil(state.max / state.numColumns);
+    } else {
+      numRows = state.numRows;
+    }
     let height = numRows * PADDING + PADDING;
-    let width = NUM_COLUMNS * PADDING + PADDING;
+    let width = state.numColumns * PADDING + PADDING;
 
-    d3.select(el).append('svg')
+    this.svgContainer = d3.select(el).select('.svg-container');
+    this.svg = this.svgContainer.append('svg')
       .attr('viewBox', `0 0 ${width} ${height}`)
       .attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('class', 'd3')
-      .append('g')
+    this.svg.append('g')
 
     this._renderGrid(el, state);
     this.update(el, state);
@@ -37,7 +42,7 @@ class Renderer {
 
   _renderGrid(el, state) {
     let index = d3.range(state.max);
-    let g = d3.select(el).selectAll('g');
+    let g = this.svg.selectAll('g');
     let point = g.selectAll('.circle').data(index);
 
     point.enter()
@@ -46,11 +51,11 @@ class Renderer {
       .attr('r', RADIUS)
       .attr('id', (d) => 'icon' + d)
       .attr('cx', (d) => {
-        let remainder = d % NUM_COLUMNS; // calculates the x position (column number) using modulus
+        let remainder = d % state.numColumns; // calculates the x position (column number) using modulus
         return PADDING + (remainder * PADDING); // apply the buffer and return value
       })
       .attr('cy', (d) => {
-        let whole = Math.floor(d / NUM_COLUMNS); // calculates the y position (row number)
+        let whole = Math.floor(d / state.numColumns); // calculates the y position (row number)
         return PADDING + (whole * PADDING); // apply the buffer and return the value
       });
   }
@@ -81,6 +86,7 @@ class Visualization extends React.Component {
 
   getChartState() {
     return {
+      numColumns: this.props.numColumns,
       numRows: this.props.numRows,
       max: this.props.max,
       primary: this.state.confirmed ? this.props.primary : null,
@@ -89,27 +95,24 @@ class Visualization extends React.Component {
   }
 
   getHeight() {
-    let el = React.findDOMNode(this);
-    return el.offsetHeight;
+    return this.renderer.svgContainer.node().getBoundingClientRect().height;
   }
-
-  setHeight(height) {
-    let el = React.findDOMNode(this);
-    el.height = height;
+  getTop() {
+    return this.renderer.svgContainer.node().getBoundingClientRect().top;
   }
 
   render() {
     return (
       <div className='chart'>
-        {this._renderPanel()}
-      </div>
-    )
         <header className='chart__heading'>
           <div className='description'>
             <h1 className='description__title'>{this.props.labels.title}</h1>
           </div>
         </header>
         <div className='svg-container'></div>
+        {this._renderPanel()}
+      </div>
+    )
   }
 
   _renderPanel() {
