@@ -11,6 +11,7 @@ class Slider extends React.Component {
         value={this.props.value}
         max={this.props.max}
         onChange={this.props.onChange}
+        disabled={this.props.disabled}
         defaultValue={[0]}
         orientation='vertical'
         className='vertical-slider'

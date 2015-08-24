@@ -57,12 +57,15 @@ class Surprise extends React.Component {
       ref='slider'
       max={this.state.max}
       value={this.state.secondary}
-      // disabled=this.state.confirmed === false
+      disabled={this.state.confirmed}
       onChange={value => this._handleChange(value)}
     />
   }
 
   _handleChange(value) {
+    if (this.state.confirmed) {
+      return;
+    }
     this.setState({secondary: value});
   }
 

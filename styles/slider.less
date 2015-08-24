@@ -1,13 +1,12 @@
 .vertical-slider {
-  position: relative;
-  float: left;
+  flex: 0 1 25px;
 
   .handle {
     position: relative;
     text-align: center;
     background-color: @secondary;
     color: white;
-    cursor: pointer;
+    cursor: ns-resize;
     display: inline-block;
     height: 30px;
     width: 15px;
@@ -53,4 +52,15 @@
     background: @base;
     border: 1px solid darken(@base, 10%);
   }
+
+  &.disabled {
+    .handle {
+      cursor: not-allowed;
+      background-color: darken(@base, 10%);
+      &:before {
+        border-right-color: darken(@base, 10%);
+      }
+    }
+  }
+
 }
