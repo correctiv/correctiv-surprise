@@ -32,21 +32,11 @@ var Panel = (function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(
-        'header',
-        { className: 'chart__panel' },
+        'div',
+        { className: 'chart__footer' },
         _react2['default'].createElement(
           'div',
           { className: 'description' },
-          _react2['default'].createElement(
-            'h1',
-            { className: 'description__title' },
-            this.props.labels.title
-          ),
-          _react2['default'].createElement(
-            'p',
-            null,
-            this.props.labels.description
-          ),
           _react2['default'].createElement(
             'ul',
             { className: 'legend chart__legend' },
@@ -162,6 +152,7 @@ var Slider = (function (_React$Component) {
         value: this.props.value,
         max: this.props.max,
         onChange: this.props.onChange,
+        disabled: this.props.disabled,
         defaultValue: [0],
         orientation: 'vertical',
         className: 'vertical-slider',
@@ -172,6 +163,12 @@ var Slider = (function (_React$Component) {
     value: function setHeight(height) {
       var el = _react2['default'].findDOMNode(this);
       el.style.height = height + 'px';
+    }
+  }, {
+    key: 'setTop',
+    value: function setTop(top) {
+      var el = _react2['default'].findDOMNode(this);
+      el.style.top = top + 'px';
     }
   }]);
 
@@ -210,9 +207,8 @@ var _panel = require('./panel');
 
 var _panel2 = _interopRequireDefault(_panel);
 
-var NUM_COLUMNS = 20;
-var RADIUS = 5;
-var PADDING = 15;
+var RADIUS = 3;
+var PADDING = 8;
 var CLASS_NAMES = {
   BASE: 'chart__circle',
   PRIMARY: 'chart__circle--primary',
@@ -223,11 +219,18 @@ var Renderer = (function () {
   function Renderer(el, state) {
     _classCallCheck(this, Renderer);
 
-    var numRows = state.numRows || Math.ceil(state.max / NUM_COLUMNS);
+    var numRows = undefined;
+    if (state.numRows === undefined) {
+      numRows = Math.ceil(state.max / state.numColumns);
+    } else {
+      numRows = state.numRows;
+    }
     var height = numRows * PADDING + PADDING;
-    var width = NUM_COLUMNS * PADDING + PADDING;
+    var width = state.numColumns * PADDING + PADDING;
 
-    _d32['default'].select(el).append('svg').attr('viewBox', '0 0 ' + width + ' ' + height).attr('preserveAspectRatio', 'xMinYMin meet').attr('class', 'd3').append('g');
+    this.svgContainer = _d32['default'].select(el).select('.svg-container');
+    this.svg = this.svgContainer.append('svg').attr('viewBox', '0 0 ' + width + ' ' + height).attr('preserveAspectRatio', 'xMinYMin meet').attr('class', 'd3');
+    this.svg.append('g');
 
     this._renderGrid(el, state);
     this.update(el, state);
@@ -246,16 +249,16 @@ var Renderer = (function () {
     key: '_renderGrid',
     value: function _renderGrid(el, state) {
       var index = _d32['default'].range(state.max);
-      var g = _d32['default'].select(el).selectAll('g');
+      var g = this.svg.selectAll('g');
       var point = g.selectAll('.circle').data(index);
 
       point.enter().append('circle').attr('class', CLASS_NAMES.BASE).attr('r', RADIUS).attr('id', function (d) {
         return 'icon' + d;
       }).attr('cx', function (d) {
-        var remainder = d % NUM_COLUMNS; // calculates the x position (column number) using modulus
+        var remainder = d % state.numColumns; // calculates the x position (column number) using modulus
         return PADDING + remainder * PADDING; // apply the buffer and return value
       }).attr('cy', function (d) {
-        var whole = Math.floor(d / NUM_COLUMNS); // calculates the y position (row number)
+        var whole = Math.floor(d / state.numColumns); // calculates the y position (row number)
         return PADDING + whole * PADDING; // apply the buffer and return the value
       });
     }
@@ -299,6 +302,7 @@ var Visualization = (function (_React$Component) {
     key: 'getChartState',
     value: function getChartState() {
       return {
+        numColumns: this.props.numColumns,
         numRows: this.props.numRows,
         max: this.props.max,
         primary: this.state.confirmed ? this.props.primary : null,
@@ -308,14 +312,12 @@ var Visualization = (function (_React$Component) {
   }, {
     key: 'getHeight',
     value: function getHeight() {
-      var el = _react2['default'].findDOMNode(this);
-      return el.offsetHeight;
+      return this.renderer.svgContainer.node().getBoundingClientRect().height;
     }
   }, {
-    key: 'setHeight',
-    value: function setHeight(height) {
-      var el = _react2['default'].findDOMNode(this);
-      el.height = height;
+    key: 'getTop',
+    value: function getTop() {
+      return this.renderer.svgContainer.node().getBoundingClientRect().top;
     }
   }, {
     key: 'render',
@@ -323,6 +325,20 @@ var Visualization = (function (_React$Component) {
       return _react2['default'].createElement(
         'div',
         { className: 'chart' },
+        _react2['default'].createElement(
+          'header',
+          { className: 'chart__heading' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'description' },
+            _react2['default'].createElement(
+              'h1',
+              { className: 'description__title' },
+              this.props.labels.title
+            )
+          )
+        ),
+        _react2['default'].createElement('div', { className: 'svg-container' }),
         this._renderPanel()
       );
     }
@@ -421,6 +437,7 @@ var Surprise = (function (_React$Component) {
           labels: this.props.example.labels,
           max: this.props.example.max,
           primary: this.props.example.primary,
+          numColumns: this.props.example.numColumns,
           numRows: this.props.example.numRows
         }),
         _react2['default'].createElement(_componentsVisualization2['default'], {
@@ -431,6 +448,7 @@ var Surprise = (function (_React$Component) {
           max: this.state.max,
           primary: this.state.primary,
           secondary: this.state.secondary,
+          numColumns: this.props.interactive.numColumns,
           numRows: this.props.interactive.numRows,
           onConfirm: function (event) {
             return _this._handleConfirm(event);
@@ -444,26 +462,30 @@ var Surprise = (function (_React$Component) {
     value: function componentDidMount() {
       var height = this.refs.interactive.getHeight();
       this.refs.slider.setHeight(height);
+      var top = this.refs.interactive.getTop();
+      this.refs.slider.setTop(top);
     }
   }, {
     key: '_renderSlider',
     value: function _renderSlider() {
       var _this2 = this;
 
-      if (this.state.confirmed === false) {
-        return _react2['default'].createElement(_componentsSlider2['default'], {
-          ref: 'slider',
-          max: this.state.max,
-          value: this.state.secondary,
-          onChange: function (value) {
-            return _this2._handleChange(value);
-          }
-        });
-      }
+      return _react2['default'].createElement(_componentsSlider2['default'], {
+        ref: 'slider',
+        max: this.state.max,
+        value: this.state.secondary,
+        disabled: this.state.confirmed,
+        onChange: function (value) {
+          return _this2._handleChange(value);
+        }
+      });
     }
   }, {
     key: '_handleChange',
     value: function _handleChange(value) {
+      if (this.state.confirmed) {
+        return;
+      }
       this.setState({ secondary: value });
     }
   }, {

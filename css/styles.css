@@ -182,21 +182,45 @@ body {
   font-family: Georgia, Times, 'Times New Roman', serif;
   color: #1a1a1a;
 }
-.chart {
-  width: 45%;
-  max-width: 600px;
-  min-height: 240px;
-  padding: 0;
-  margin: 0 15px 30px 0;
+.surprise {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -ms-flex-line-pack: stretch;
+  -webkit-align-content: stretch;
+  align-content: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
   background: #f2f2f2;
-  display: inline-block;
-  float: left;
-  position: relative;
+}
+.chart {
+  padding: 0;
+  background: #f2f2f2;
+  -webkit-flex: 0 1 50%;
+  -ms-flex: 0 1 50%;
+  flex: 0 1 50%;
 }
 @media (min-width: 768px) {
   .chart {
     margin-right: 30px;
   }
+}
+.chart__heading {
+  margin: 0 10px;
+  padding: 0 22px;
+}
+.chart__footer {
+  padding: 0 10px;
 }
 .chart__panel {
   background: rgba(255, 255, 255, 0.9);
@@ -205,11 +229,6 @@ body {
   margin: 0 40px;
   min-height: 240px;
   padding: 0 22px;
-  position: absolute;
-  top: 40%;
-  left: 0;
-  right: 0;
-  overflow: hidden;
 }
 .chart__legend {
   width: 100%;
@@ -256,6 +275,7 @@ body {
 }
 .credits {
   display: block;
+  clear: both;
   padding: 10px 20px 0 0;
   color: #b3b3b3;
 }
@@ -263,6 +283,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
+  font-size: 10px;
 }
 .credits__link {
   color: #b3b3b3;
@@ -299,15 +320,16 @@ body {
   color: #ff7a7f;
 }
 .vertical-slider {
-  position: relative;
-  float: left;
+  -webkit-flex: 0 1 25px;
+  -ms-flex: 0 1 25px;
+  flex: 0 1 25px;
 }
 .vertical-slider .handle {
   position: relative;
   text-align: center;
   background-color: #ff7a7f;
   color: white;
-  cursor: pointer;
+  cursor: ns-resize;
   display: inline-block;
   height: 30px;
   width: 15px;
@@ -324,6 +346,8 @@ body {
   border-bottom: 15px solid transparent;
   left: -10px;
   top: 0px;
+  /* Antialias borders */
+  -moz-transform: scale(0.9999);
 }
 .vertical-slider .handle.active {
   background-color: #ff474e;
@@ -344,4 +368,11 @@ body {
 .vertical-slider .bar-1 {
   background: #b3b3b3;
   border: 1px solid #9a9a9a;
+}
+.vertical-slider.disabled .handle {
+  cursor: not-allowed;
+  background-color: #9a9a9a;
+}
+.vertical-slider.disabled .handle:before {
+  border-right-color: #9a9a9a;
 }
