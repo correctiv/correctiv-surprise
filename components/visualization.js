@@ -104,6 +104,12 @@ class Visualization extends React.Component {
         {this._renderPanel()}
       </div>
     )
+        <header className='chart__heading'>
+          <div className='description'>
+            <h1 className='description__title'>{this.props.labels.title}</h1>
+          </div>
+        </header>
+        <div className='svg-container'></div>
   }
 
   _renderPanel() {

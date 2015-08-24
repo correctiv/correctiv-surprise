@@ -6,10 +6,8 @@ class Panel extends React.Component {
 
   render() {
     return (
-      <header className='chart__panel'>
+      <div className='chart__footer'>
         <div className='description'>
-          <h1 className='description__title'>{this.props.labels.title}</h1>
-          <p>{this.props.labels.description}</p>
           <ul className='legend chart__legend'>
             {this._renderSecondary()}
             {this._renderPrimary()}
@@ -19,7 +17,7 @@ class Panel extends React.Component {
           </ul>
           {this._renderButton()}
         </div>
-      </header>
+      </div>
     )
   }
 
