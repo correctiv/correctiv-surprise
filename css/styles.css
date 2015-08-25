@@ -219,8 +219,18 @@ body {
 .chart__heading {
   padding: 0 5px;
 }
+@media (min-width: 768px) {
+  .chart__heading {
+    padding: 0 15px;
+  }
+}
 .chart__footer {
   padding: 0 5px;
+}
+@media (min-width: 768px) {
+  .chart__footer {
+    padding: 0 15px;
+  }
 }
 .chart__panel {
   background: rgba(255, 255, 255, 0.9);
