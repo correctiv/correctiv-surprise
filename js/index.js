@@ -344,7 +344,7 @@ var Renderer = (function () {
     var width = state.numColumns * PADDING + PADDING;
 
     this.svgContainer = _d32['default'].select(el).select('.svg-container');
-    this.svg = this.svgContainer.append('svg').attr('viewBox', '0 0 ' + width + ' ' + height).attr('preserveAspectRatio', 'xMinYMin meet').attr('class', 'd3');
+    this.svg = this.svgContainer.append('svg').attr('viewBox', '0 0 ' + width + ' ' + height).attr('preserveAspectRatio', 'xMinYMin meet').attr('class', 'd3').style('width', '100%');
     this.svg.append('g');
 
     this._renderGrid(el, state);
