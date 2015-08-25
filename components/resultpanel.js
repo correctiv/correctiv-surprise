@@ -1,0 +1,41 @@
+'use strict';
+
+import React from 'react';
+
+class ResultPanel extends React.Component {
+
+  render() {
+    let threshold = 10;
+    let diff = this.props.value - this.props.realValue;
+    return (
+      <div className='surprise__result-panel'>
+        <p>
+          Du hast <strong>{this.props.value}</strong> geschätzt.
+          {this.guessDifference(diff, threshold)}
+        </p>
+        <p>
+          Der echte Wert liegt bei <strong>{this.props.realValue}</strong>.
+        </p>
+        <p>
+          Durchschnittlich wurde {Math.round(this.props.average)} geschätzt.{' '}
+          <strong>{Math.round(this.props.percent_gte)}%</strong> aller Leser haben mehr als {this.props.realValue} geschätzt.
+        </p>
+      </div>
+    )
+  }
+  guessDifference(diff, threshold) {
+    if (diff > threshold * 10) {
+      return ' Das war viel zu hoch. ';
+    } else if (diff > threshold)  {
+      return ' Das war zu hoch. ';
+    } else if (diff < -threshold) {
+      return ' Das war zu niedrig. ';
+    } else if(diff === 0) {
+      return ' Das war genau richtig! ';
+    } else {
+      return ' Das war ungefähr richtig. ';
+    }
+  }
+}
+
+export default ResultPanel;

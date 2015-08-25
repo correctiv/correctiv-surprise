@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Slider from './components/slider';
+import ResultPanel from './components/resultpanel';
 import Visualization from './components/visualization';
 
 class Surprise extends React.Component {
@@ -41,6 +42,7 @@ class Surprise extends React.Component {
           onConfirm={event => this._handleConfirm(event)}
         />
         {this._renderSlider()}
+        {this._renderResultPanel()}
       </div>
     )
   }
@@ -62,6 +64,18 @@ class Surprise extends React.Component {
     />
   }
 
+  _renderResultPanel() {
+    if (this.state.average) {
+      return <ResultPanel
+        average={this.state.average}
+        realValue={this.state.primary}
+        value={this.state.secondary}
+        percent_lt={this.state.percent_lt}
+        percent_gte={this.state.percent_gte}
+      />
+    }
+  }
+
   _handleChange(value) {
     if (this.state.confirmed) {
       return;
@@ -71,6 +85,27 @@ class Surprise extends React.Component {
 
   _handleConfirm() {
     this.setState({confirmed: true});
+    this._sendStats();
+  }
+
+  _sendStats() {
+    if (this.props.revealUrl === undefined) {
+      return;
+    }
+    let self = this;
+    let request = new XMLHttpRequest();
+
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+        let data = JSON.parse(request.responseText);
+        self.setState(data);
+      }
+    };
+
+    request.open('POST', this.props.revealUrl, true);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.setRequestHeader('Accept', 'application/json; charset=UTF-8');
+    request.send('_method=PUT&value=' + this.state.secondary);
   }
 }
 
