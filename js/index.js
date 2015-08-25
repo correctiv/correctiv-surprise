@@ -168,23 +168,23 @@ var ResultPanel = (function (_React$Component) {
             null,
             this.props.realValue
           ),
-          '.'
-        ),
-        _react2['default'].createElement(
-          'p',
-          null,
-          'Durchschnittlich wurde ',
-          Math.round(this.props.average),
-          ' geschätzt.',
+          '.',
           ' ',
           _react2['default'].createElement(
             'strong',
             null,
-            Math.round(this.props.percent_gte),
+            Math.round(this.props.percent_gt_real),
             '%'
           ),
           ' aller Leser haben mehr als ',
           this.props.realValue,
+          ' geschätzt.'
+        ),
+        _react2['default'].createElement(
+          'p',
+          null,
+          'Durchschnittlich wurde der Wert auf ',
+          Math.round(this.props.average),
           ' geschätzt.'
         )
       );
