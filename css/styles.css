@@ -274,6 +274,18 @@ body {
     font-size: 26px;
   }
 }
+.surprise__result-panel {
+  position: absolute;
+  width: 400px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #333;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 150px;
+}
 .credits {
   display: block;
   clear: both;
