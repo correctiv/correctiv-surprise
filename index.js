@@ -70,8 +70,8 @@ class Surprise extends React.Component {
         average={this.state.average}
         realValue={this.state.primary}
         value={this.state.secondary}
-        percent_lt={this.state.percent_lt}
-        percent_gte={this.state.percent_gte}
+        percent_lt_real={this.state.percent_lt_real}
+        percent_gt_real={this.state.percent_gt_real}
       />
     }
   }

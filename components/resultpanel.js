@@ -14,11 +14,11 @@ class ResultPanel extends React.Component {
           {this.guessDifference(diff, threshold)}
         </p>
         <p>
-          Der echte Wert liegt bei <strong>{this.props.realValue}</strong>.
+          Der echte Wert liegt bei <strong>{this.props.realValue}</strong>.{' '}
+          <strong>{Math.round(this.props.percent_gt_real)}%</strong> aller Leser haben mehr als {this.props.realValue} geschätzt.
         </p>
         <p>
-          Durchschnittlich wurde {Math.round(this.props.average)} geschätzt.{' '}
-          <strong>{Math.round(this.props.percent_gte)}%</strong> aller Leser haben mehr als {this.props.realValue} geschätzt.
+          Durchschnittlich wurde der Wert auf {Math.round(this.props.average)} geschätzt.
         </p>
       </div>
     )
