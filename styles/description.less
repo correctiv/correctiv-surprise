@@ -1,5 +1,4 @@
 .description {
-  margin-bottom: 20px;
   font-size: 12px;
   line-height: 1.4;
 
@@ -22,13 +21,19 @@
 
 .surprise__result-panel {
   position: absolute;
-  width: 400px;
+  width: 300px;
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid #333;
-  padding: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 10px;
+  margin: auto;
   left: 0;
   right: 0;
-  top: 150px;
+  z-index: 5;
+  top: 50px;
+
+  @media (min-width: 768px) {
+    width: 400px;
+    top: 150px;
+  }
+
 }

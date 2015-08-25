@@ -24,7 +24,7 @@ class Renderer {
     let height = numRows * PADDING + PADDING;
     let width = state.numColumns * PADDING + PADDING;
 
-    this.svgContainer = d3.select(el).select('.svg-container');
+    this.svgContainer = d3.select(el).select('.surprise__svg-container');
     this.svg = this.svgContainer.append('svg')
       .attr('viewBox', `0 0 ${width} ${height}`)
       .attr('preserveAspectRatio', 'xMinYMin meet')
@@ -112,7 +112,7 @@ class Visualization extends React.Component {
             <h1 className='description__title'>{this.props.labels.title}</h1>
           </div>
         </header>
-        <div className='svg-container'></div>
+        <div className='surprise__svg-container'></div>
         {this._renderPanel()}
       </div>
     )

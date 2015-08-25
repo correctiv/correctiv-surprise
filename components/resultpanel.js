@@ -14,7 +14,7 @@ class ResultPanel extends React.Component {
           {this.guessDifference(diff, threshold)}
         </p>
         <p>
-          Der echte Wert liegt bei <strong>{this.props.realValue}</strong>.<br/>
+          Nur <strong>{this.props.realValue} von {this.props.maxValue}</strong> Verge&shy;waltigungen wurden berichtet.<br/>
           <strong>{Math.round(this.props.percent_gt_real)}%</strong> aller Leser haben mehr als {this.props.realValue} geschätzt.
         </p>
         <p>

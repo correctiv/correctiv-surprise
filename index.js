@@ -69,6 +69,7 @@ class Surprise extends React.Component {
       return <ResultPanel
         average={this.state.average}
         realValue={this.state.primary}
+        maxValue={this.state.max}
         value={this.state.secondary}
         percent_lt_real={this.state.percent_lt_real}
         percent_gt_real={this.state.percent_gt_real}
