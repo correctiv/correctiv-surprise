@@ -341,8 +341,7 @@ var Visualization = (function (_React$Component) {
           )
         ),
         _react2['default'].createElement('div', { className: 'svg-container' }),
-        this._renderPanel(),
-        this._renderResult()
+        this._renderPanel()
       );
     }
   }, {
