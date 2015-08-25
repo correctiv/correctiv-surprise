@@ -50,6 +50,7 @@ var Panel = (function (_React$Component) {
               this.props.max
             )
           ),
+          this._renderHint(),
           this._renderButton()
         )
       );
@@ -85,6 +86,17 @@ var Panel = (function (_React$Component) {
             ' ',
             this.props.secondary
           )
+        );
+      }
+    }
+  }, {
+    key: '_renderHint',
+    value: function _renderHint() {
+      if (!this.props.primary) {
+        return _react2['default'].createElement(
+          'p',
+          null,
+          'Passe Deine Schätzung mit dem Schieberegler an der rechten Seite an.'
         );
       }
     }
