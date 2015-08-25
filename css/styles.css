@@ -217,8 +217,7 @@ body {
   }
 }
 .chart__heading {
-  margin: 0 10px;
-  padding: 0 22px;
+  padding: 0 10px;
 }
 .chart__footer {
   padding: 0 10px;
@@ -253,7 +252,6 @@ body {
   float: right;
 }
 .description {
-  margin-bottom: 20px;
   font-size: 12px;
   line-height: 1.4;
 }
@@ -276,15 +274,21 @@ body {
 }
 .surprise__result-panel {
   position: absolute;
-  width: 400px;
+  width: 300px;
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid #333;
-  padding: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 10px;
+  margin: auto;
   left: 0;
   right: 0;
-  top: 150px;
+  z-index: 5;
+  top: 80px;
+}
+@media (min-width: 768px) {
+  .surprise__result-panel {
+    width: 400px;
+    top: 150px;
+  }
 }
 .credits {
   display: block;

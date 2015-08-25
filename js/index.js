@@ -50,7 +50,6 @@ var Panel = (function (_React$Component) {
               this.props.max
             )
           ),
-          this._renderHint(),
           this._renderButton()
         )
       );
@@ -75,7 +74,7 @@ var Panel = (function (_React$Component) {
   }, {
     key: '_renderSecondary',
     value: function _renderSecondary() {
-      if (this.props.secondary) {
+      if (this.props.secondary !== undefined) {
         return _react2['default'].createElement(
           'li',
           { className: 'legend__item --secondary' },
@@ -86,17 +85,6 @@ var Panel = (function (_React$Component) {
             ' ',
             this.props.secondary
           )
-        );
-      }
-    }
-  }, {
-    key: '_renderHint',
-    value: function _renderHint() {
-      if (!this.props.primary) {
-        return _react2['default'].createElement(
-          'p',
-          null,
-          'Passe Deine Schätzung mit dem Schieberegler an der rechten Seite an.'
         );
       }
     }
@@ -174,13 +162,15 @@ var ResultPanel = (function (_React$Component) {
         _react2['default'].createElement(
           'p',
           null,
-          'Der echte Wert liegt bei ',
+          'Nur ',
           _react2['default'].createElement(
             'strong',
             null,
-            this.props.realValue
+            this.props.realValue,
+            ' von ',
+            this.props.maxValue
           ),
-          '.',
+          ' Verge­waltigungen wurden berichtet.',
           _react2['default'].createElement('br', null),
           _react2['default'].createElement(
             'strong',
@@ -343,7 +333,7 @@ var Renderer = (function () {
     var height = numRows * PADDING + PADDING;
     var width = state.numColumns * PADDING + PADDING;
 
-    this.svgContainer = _d32['default'].select(el).select('.svg-container');
+    this.svgContainer = _d32['default'].select(el).select('.surprise__svg-container');
     this.svg = this.svgContainer.append('svg').attr('viewBox', '0 0 ' + width + ' ' + height).attr('preserveAspectRatio', 'xMinYMin meet').attr('class', 'd3').style('width', '100%');
     this.svg.append('g');
 
@@ -455,7 +445,7 @@ var Visualization = (function (_React$Component) {
             )
           )
         ),
-        _react2['default'].createElement('div', { className: 'svg-container' }),
+        _react2['default'].createElement('div', { className: 'surprise__svg-container' }),
         this._renderPanel()
       );
     }
@@ -609,6 +599,7 @@ var Surprise = (function (_React$Component) {
         return _react2['default'].createElement(_componentsResultpanel2['default'], {
           average: this.state.average,
           realValue: this.state.primary,
+          maxValue: this.state.max,
           value: this.state.secondary,
           percent_lt_real: this.state.percent_lt_real,
           percent_gt_real: this.state.percent_gt_real
