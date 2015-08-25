@@ -100,7 +100,7 @@ gulp.task('html', function() {
 });
 
 // deploy to github pages
-gulp.task('deploy', function() {
+gulp.task('commitghpages', function() {
   return gulp.src('./dist/**/*')
     .pipe(ghPages());
 });
@@ -114,3 +114,4 @@ gulp.task('default', ['less', 'html', 'images',  'javascript:watch', 'watch', 's
 
 /* Create a build of frontend code */
 gulp.task('build', ['less', 'html', 'images', 'javascript:build']);
+gulp.task('deploy', ['build', 'commitghpages']);
