@@ -15,6 +15,7 @@ class Panel extends React.Component {
               {this.props.labels.maxLabel} {this.props.max}
             </li>
           </ul>
+          {this._renderHint()}
           {this._renderButton()}
         </div>
       </div>
@@ -34,6 +35,12 @@ class Panel extends React.Component {
       return <li className='legend__item --secondary'>
         <strong>{this.props.labels.secondaryLabel} {this.props.secondary}</strong>
       </li>
+    }
+  }
+
+  _renderHint() {
+    if (!this.props.primary) {
+      return <p>Passe Deine Schätzung mit dem Schieberegler an der rechten Seite an.</p>
     }
   }
 
