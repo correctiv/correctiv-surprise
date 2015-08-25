@@ -29,6 +29,7 @@ class Renderer {
       .attr('viewBox', `0 0 ${width} ${height}`)
       .attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('class', 'd3')
+      .style('width', '100%')
     this.svg.append('g')
 
     this._renderGrid(el, state);
