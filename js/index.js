@@ -169,7 +169,7 @@ var ResultPanel = (function (_React$Component) {
             this.props.realValue
           ),
           '.',
-          ' ',
+          _react2['default'].createElement('br', null),
           _react2['default'].createElement(
             'strong',
             null,
