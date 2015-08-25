@@ -98,7 +98,9 @@ class Visualization extends React.Component {
     return this.renderer.svgContainer.node().getBoundingClientRect().height;
   }
   getTop() {
-    return this.renderer.svgContainer.node().getBoundingClientRect().top;
+    let el = React.findDOMNode(this);
+    let svgTop = this.renderer.svgContainer.node().getBoundingClientRect().top;
+    return svgTop - el.getBoundingClientRect().top;
   }
 
   render() {
