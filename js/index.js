@@ -317,7 +317,9 @@ var Visualization = (function (_React$Component) {
   }, {
     key: 'getTop',
     value: function getTop() {
-      return this.renderer.svgContainer.node().getBoundingClientRect().top;
+      var el = _react2['default'].findDOMNode(this);
+      var svgTop = this.renderer.svgContainer.node().getBoundingClientRect().top;
+      return svgTop - el.getBoundingClientRect().top;
     }
   }, {
     key: 'render',
@@ -339,7 +341,8 @@ var Visualization = (function (_React$Component) {
           )
         ),
         _react2['default'].createElement('div', { className: 'svg-container' }),
-        this._renderPanel()
+        this._renderPanel(),
+        this._renderResult()
       );
     }
   }, {

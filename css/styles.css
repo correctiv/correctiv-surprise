@@ -202,6 +202,7 @@ body {
   -ms-flex-align: stretch;
   align-items: stretch;
   background: #f2f2f2;
+  position: relative;
 }
 .chart {
   padding: 0;
@@ -325,7 +326,7 @@ body {
   flex: 0 1 25px;
 }
 .vertical-slider .handle {
-  position: relative;
+  position: absolute;
   text-align: center;
   background-color: #ff7a7f;
   color: white;
