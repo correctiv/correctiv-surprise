@@ -2,11 +2,18 @@
 
 import React from 'react';
 
+import {render} from './utils';
+
 class ResultPanel extends React.Component {
 
   render() {
     let threshold = 10;
     let diff = this.props.value - this.props.realValue;
+    let template = render(this.props.labels.revealDescription, {
+        maxValue: this.props.maxValue,
+        realValue: this.props.realValue,
+        value: this.props.value
+    });
     return (
       <div className='surprise__result-panel'>
         <p>
@@ -14,7 +21,7 @@ class ResultPanel extends React.Component {
           {this.guessDifference(diff, threshold)}
         </p>
         <p>
-          Nur <strong>{this.props.realValue} von {this.props.maxValue}</strong> Verge&shy;waltigungen wurden berichtet.<br/>
+          {{__html: template}}
           <strong>{Math.round(this.props.percent_gt_real)}%</strong> aller Leser haben mehr als {this.props.realValue} geschätzt.
         </p>
         <p>
