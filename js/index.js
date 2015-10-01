@@ -149,6 +149,11 @@ var ResultPanel = (function (_React$Component) {
   }
 
   _createClass(ResultPanel, [{
+    key: '_createMarkup',
+    value: function _createMarkup(template) {
+      return { __html: template };
+    }
+  }, {
     key: 'render',
     value: function render() {
       var threshold = 10;
@@ -176,7 +181,7 @@ var ResultPanel = (function (_React$Component) {
         _react2['default'].createElement(
           'p',
           null,
-          { __html: template },
+          _react2['default'].createElement('div', { dangerouslySetInnerHTML: this._createMarkup(template) }),
           _react2['default'].createElement(
             'strong',
             null,
