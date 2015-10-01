@@ -6,7 +6,7 @@ class Panel extends React.Component {
 
   render() {
     return (
-      <div className='chart__footer'>
+      <div className='surprise-chart__footer'>
         <div className='description'>
           <ul className='legend chart__legend'>
             {this._renderSecondary()}
@@ -46,7 +46,7 @@ class Panel extends React.Component {
   _renderButton() {
     if (this.props.onConfirm) {
       return <button
-        className='chart__button'
+        className='surprise-chart__button'
         onClick={this.props.onConfirm}>
         {this.props.labels.button}
       </button>;

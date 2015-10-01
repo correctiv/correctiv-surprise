@@ -7,9 +7,9 @@ import Panel from './panel';
 const RADIUS = 3;
 const PADDING = 8;
 const CLASS_NAMES = {
-  BASE: 'chart__circle',
-  PRIMARY: 'chart__circle--primary',
-  SECONDARY: 'chart__circle--secondary'
+  BASE: 'surprise-chart__circle',
+  PRIMARY: 'surprise-chart__circle--primary',
+  SECONDARY: 'surprise-chart__circle--secondary'
 }
 
 class Renderer {
@@ -106,8 +106,8 @@ class Visualization extends React.Component {
 
   render() {
     return (
-      <div className='chart'>
-        <header className='chart__heading'>
+      <div className='surprise-chart'>
+        <header className='surprise-chart__heading'>
           <div className='description'>
             <h1 className='description__title'>{this.props.labels.title}</h1>
           </div>
