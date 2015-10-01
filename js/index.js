@@ -178,10 +178,10 @@ var ResultPanel = (function (_React$Component) {
           ' geschätzt.',
           this.guessDifference(diff, threshold)
         ),
+        _react2['default'].createElement('p', { dangerouslySetInnerHTML: this._createMarkup(template) }),
         _react2['default'].createElement(
           'p',
           null,
-          _react2['default'].createElement('div', { dangerouslySetInnerHTML: this._createMarkup(template) }),
           _react2['default'].createElement(
             'strong',
             null,
