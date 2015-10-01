@@ -33,7 +33,7 @@ var Panel = (function (_React$Component) {
     value: function render() {
       return _react2['default'].createElement(
         'div',
-        { className: 'chart__footer' },
+        { className: 'surprise-chart__footer' },
         _react2['default'].createElement(
           'div',
           { className: 'description' },
@@ -102,7 +102,7 @@ var Panel = (function (_React$Component) {
         return _react2['default'].createElement(
           'button',
           {
-            className: 'chart__button',
+            className: 'surprise-chart__button',
             onClick: this.props.onConfirm },
           this.props.labels.button
         );
@@ -336,9 +336,9 @@ var _panel2 = _interopRequireDefault(_panel);
 var RADIUS = 3;
 var PADDING = 8;
 var CLASS_NAMES = {
-  BASE: 'chart__circle',
-  PRIMARY: 'chart__circle--primary',
-  SECONDARY: 'chart__circle--secondary'
+  BASE: 'surprise-chart__circle',
+  PRIMARY: 'surprise-chart__circle--primary',
+  SECONDARY: 'surprise-chart__circle--secondary'
 };
 
 var Renderer = (function () {
@@ -452,10 +452,10 @@ var Visualization = (function (_React$Component) {
     value: function render() {
       return _react2['default'].createElement(
         'div',
-        { className: 'chart' },
+        { className: 'surprise-chart' },
         _react2['default'].createElement(
           'header',
-          { className: 'chart__heading' },
+          { className: 'surprise-chart__heading' },
           _react2['default'].createElement(
             'div',
             { className: 'description' },
