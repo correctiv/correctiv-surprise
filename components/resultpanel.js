@@ -24,8 +24,8 @@ class ResultPanel extends React.Component {
           Du hast <strong>{this.props.value}</strong> geschätzt.
           {this.guessDifference(diff, threshold)}
         </p>
+        <p dangerouslySetInnerHTML={this._createMarkup(template)} />
         <p>
-          <div dangerouslySetInnerHTML={this._createMarkup(template)} />
           <strong>{Math.round(this.props.percent_gt_real)}%</strong> aller Leser haben mehr als {this.props.realValue} geschätzt.
         </p>
         <p>
