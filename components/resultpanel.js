@@ -6,6 +6,10 @@ import {render} from './utils';
 
 class ResultPanel extends React.Component {
 
+  _createMarkup(template) {
+    return {__html: template};
+  };
+
   render() {
     let threshold = 10;
     let diff = this.props.value - this.props.realValue;
@@ -21,7 +25,7 @@ class ResultPanel extends React.Component {
           {this.guessDifference(diff, threshold)}
         </p>
         <p>
-          {{__html: template}}
+          <div dangerouslySetInnerHTML={this._createMarkup(template)} />
           <strong>{Math.round(this.props.percent_gt_real)}%</strong> aller Leser haben mehr als {this.props.realValue} geschätzt.
         </p>
         <p>
