@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Ausbildungsplätze in Bremen</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+  </head>
+  <body>
+    <div id='viz'></div>
+    <!-- <small class='surprise__credits'>
+      <p class='surprise__credits-item'>Quelle:
+        <a class='surprise__credits-link' href='https://correctiv.org' target='_blank'>CORRECT!V</a>
+      </p>
+    </small> -->
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+      Surprise.render(document.getElementById('viz'), {
+        revealUrl: 'https://correctiv.org/api/reveal/2/',
+        example: {
+          max: 513,
+          primary: 513,
+          numColumns: 30,
+          numRows: 20,
+          labels: {
+            title: 'Bremen wollte 513 zusätzliche Plätze anbieten.',
+            maxLabel: null,
+            primaryLabel: ''
+          }
+        },
+        interactive: {
+          max: 513,
+          primary: 213,
+          secondary: 0,
+          numColumns: 30,
+          numRows: 20,
+          labels: {
+            title: 'Wie viel Plätze hat Bremen tatsächlich geschaffen?',
+            revealDescription: 'Nur <strong>{realValue} der versprochenen {maxValue} Plätze</strong> wurden tatsächlich geschaffen.<br/>',
+            maxLabel: null,
+            primaryLabel: 'Zusätzliche Plätze:',
+            secondaryLabel: 'Ihre Schätzung:',
+            button: 'Schätzung überprüfen'
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

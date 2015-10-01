@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Presseaussendungen der Polizei Wien</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+  </head>
+  <body>
+    <div id='viz'></div>
+    <small class='surprise__credits'>
+      <p class='surprise__credits-item'>Quelle: Presseaussendungen der Wiener Polizei, Polizeiliche Kriminalstatistik (2013 und 2014, zusammengefasst).
+      Visualisierung:
+        <a class='surprise__credits-link' href='https://correctiv.org' target='_blank'>CORRECT!V</a>
+      </p>
+    </small>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+      Surprise.render(document.getElementById('viz'), {
+        revealUrl: 'https://correctiv.org/api/reveal/1/',
+        example: {
+          max: 622,
+          primary: 130,
+          numColumns: 25,
+          numRows: 26,
+          labels: {
+            title: 'Handtaschenraub',
+            maxLabel: 'Anzeigen:',
+            primaryLabel: 'Berichtete Fälle:'
+          }
+        },
+        interactive: {
+          max: 647,
+          primary: 15,
+          secondary: 50,
+          numColumns: 25,
+          labels: {
+            title: 'Vergewaltigung',
+            description: 'Über wie viele Vergewaltigungen berichtete die Polizei? Verwenden Sie den Schieberegler, um eine Schätzung abzugeben.',
+            revealTemplate: 'Nur <strong>{realValue} von {maxValue}</strong> Verge&shy;waltigungen wurden berichtet.<br/>',
+            maxLabel: 'Anzeigen:',
+            primaryLabel: 'Tatsächlich berichtet:',
+            secondaryLabel: 'Ihre Schätzung:',
+            button: 'Schätzung überprüfen'
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
